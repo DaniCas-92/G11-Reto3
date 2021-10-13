@@ -37,11 +37,9 @@ public class Reservation implements Serializable {
     private Integer idReservation;
     
     @Column(name = "startDate")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
     
     @Column(name = "devolutionDate")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date devolutionDate;
     
     @Column(name="status")
