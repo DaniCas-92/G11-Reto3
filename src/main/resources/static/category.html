@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="application/json" >
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/functionsCategory.js"></script>
+	<link rel="stylesheet" href="css/ajax.css">
+	<link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css" rel="stylesheet"/>
+	<script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
+	<h2>CRUD Categoria</h2>
+	<div class="centraTabla">
+		<table>
+			<tr>
+				<input type="hidden" id="id" placeholder="id" disabled="true" >
+				<td><label strong><b>Nombre:</b></label></td>
+				<td><input type="text" id="name" placeholder="name" size="80" maxlength="45"></td>
+			</tr>
+			
+			<tr>
+				<td><label><b>Descripción:</b></label></td>
+				<td><input type="text" columns="2" id="description" placeholder="description" size="80" maxlength="250"></td>
+			</tr>
+		   
+		</table>
+    </div>
+	<button onclick="traerInformacion()" id="consultar">Consultar</button>
+	<button onclick="guardarInformacion()" id="guardar">Guardar!</button>
+	<button onclick="actualizarInformacion()" id="actualizar" disabled="true">Actualizar</button>
+	<br></br>
+	------------------------------------------------------------------------------------------------------
+	<br></br>
+	<div id="resultado" class='centraTabla'></div>
+</body>
+</html>

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MotoG11Application {
 
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		SpringApplication.run(MotoG11Application.class, args);
 	}
 

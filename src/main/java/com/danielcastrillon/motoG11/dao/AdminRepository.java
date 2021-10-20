@@ -28,4 +28,6 @@ public class AdminRepository {
     public Optional<Admin> getAdmin(int idAdmin) {return adminCrudRepository.findById(idAdmin);}
     
     public Admin save(Admin admin) {return adminCrudRepository.save(admin);}
+    
+    public void delete(Admin admin) {adminCrudRepository.delete(admin);}
 }

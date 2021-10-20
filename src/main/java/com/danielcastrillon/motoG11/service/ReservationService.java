@@ -44,4 +44,54 @@ public class ReservationService {
        }
  
     }
+
+    public Reservation update(Reservation reservation) {
+        if (reservation.getIdReservation()!= null) {
+            Optional<Reservation> r = reservationRepository.getReservation(reservation.getIdReservation());
+            if (!r.isEmpty()) {
+                if (reservation.getStartDate()!= null) {
+                    r.get().setStartDate(reservation.getStartDate());
+                }
+                if (reservation.getDevolutionDate()!= null) {
+                    r.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                if (reservation.getStatus()!= null) {
+                    r.get().setStatus(reservation.getStatus());
+                }
+                /*if (reservation.getMotorbike()!= null) {
+                    r.get().setMotorbike(reservation.getMotorbike());
+                }
+                if (reservation.getClient()!= null) {
+                    r.get().setClient(reservation.getClient());
+                }
+                if (reservation.getScore()!= null) {
+                    r.get().setScore(reservation.getScore());
+                }
+                if (motorbike.getReservations()!= null) {
+                    mo.get().setReservations(motorbike.getReservations());
+                }*/
+                return reservationRepository.save(r.get());
+            } else {
+                return reservation;
+            }
+        } else {
+            return reservation;
+        }
+
+    }
+
+    public boolean deleteReservation(int id) {
+        /**
+         * alternativa de Delete Optional<Category> category =
+         * categoryRepository.getCategory(id); if (category.isEmpty()){ return
+         * false; } else { categoryRepository.delete(category.get()); return
+         * true; }
+         */
+        Boolean aBoolean = getReservation(id).map(
+                reservation -> {
+                    reservationRepository.delete(reservation);
+                    return true;
+                }).orElse(false);
+        return aBoolean;
+    }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="application/json" >
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/functionsMoto.js"></script>
+	<link rel="stylesheet" href="css/ajax.css">
+	<h2>CRUD Moto</h2>
+	<div class="centraTabla">
+		<table>
+			<tr>
+				<input type="hidden" id="id" placeholder="id" >
+				<td><label><b>Marca:</b></label></td>
+				<td><input type="text" id="brand" placeholder="brand" maxlength="45"></td>
+				<td>&nbsp;</td>
+				<td><label strong><b>Nombre:</b></label></td>
+				<td><input type="text" id="name" placeholder="name" size="50" maxlength="45"></td>
+			</tr>
+			
+			<tr>
+				<td><label strong><b>Año:</b></label></td>
+				<td><input type="number" id="year" placeholder="year" maxlength="4" min="1980"></td>
+				<td>&nbsp;</td>
+				<td><label><b>Descripción:</b></label></td>
+				<td><input type="text" id="description" placeholder="description" size="50" maxlength="250"></td>
+			</tr>
+			
+			<tr>
+				<td><label><b>Categoria:</b></label></td>
+				<td><select id="cat" style="width: 100%;"></select></td>
+				<td colspan="3">&nbsp;</td>
+			</tr>
+		   
+		</table>
+    </div>
+	<button onclick="traerInformacion()" id="consultar">Consultar</button>
+	<button onclick="guardarInformacion()" id="guardar">Guardar!</button>
+	<button onclick="actualizarInformacion()" id="actualizar" disabled="true">Actualizar</button>
+	<br></br>
+	------------------------------------------------------------------------------------------------------
+	<br></br>
+	<div id="resultado" class='centraTabla'></div>
+</body>
+</html>

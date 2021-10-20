@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="application/json" >
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/functionsMessage.js"></script>
+	<link rel="stylesheet" href="css/ajax.css">
+	<h2>CRUD Mensaje</h2>
+	<div class="centraTabla">
+		<table>
+			<tr>
+				<input type="hidden" id="idMessage" placeholder="idMessage">
+				<td><label><b>Mensaje de Texto:</b></label></td>
+				<td colspan="4"><input type="text" id="messageText" placeholder="messageText" size="60" maxlength="250"></td>
+			</tr>
+
+			<tr>
+				<td><label><b>Cliente:</b></label></td>
+				<td><select id="cli" style="width: 100%;"></select></td>
+				<td>&nbsp;</td>
+				<td><label><b>Moto:</b></label></td>
+				<td><select id="mot" style="width: 100%;"></select></td>
+			</tr>
+		   
+		</table>
+    </div>
+	<button onclick="traerInformacion()" id="consultar">Consultar</button>
+	<button onclick="guardarInformacion()" id="guardar">Guardar!</button>
+	<button onclick="actualizarInformacion()" id="actualizar" disabled="true" >Actualizar</button>
+	<br></br>
+	------------------------------------------------------------------------------------------------------
+	<br></br>
+	<div id="resultado" class='centraTabla'></div>
+</body>
+</html>

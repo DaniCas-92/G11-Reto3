@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="application/json" >
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/functionsAdmin.js"></script>
+	<link rel="stylesheet" href="css/ajax.css">
+	<h2>CRUD Admin</h2>
+	<div class="centraTabla">
+		<table>
+			<tr>
+				<input type="hidden" id="idAdmin" placeholder="idAdmin" >
+				<td><label><b>Nombre:</b></label></td>
+				<td><input type="text" id="name" placeholder="name" maxlength="250"></td>
+				<td>&nbsp;</td>
+				<td><label><b>Contraseña:</b></label></td>
+				<td><input type="password" id="password" placeholder="password" maxlength="45"></td>
+			</tr>
+			
+			<tr>
+				<td><label strong><b>Correo:</b></label></td>
+				<td colspan="4"><input type="text" id="email" placeholder="email" maxlength="45"></td>
+			</tr>
+		   
+		</table>
+    </div>
+	<button onclick="traerInformacion()" id="consultar">Consultar</button>
+	<button onclick="guardarInformacion()" id="guardar">Guardar!</button>
+	<button onclick="actualizarInformacion()" id="actualizar" disabled="true">Actualizar</button>
+	<br></br>
+	------------------------------------------------------------------------------------------------------
+	<br></br>
+	<div id="resultado" class='centraTabla'></div>
+</body>
+</html>

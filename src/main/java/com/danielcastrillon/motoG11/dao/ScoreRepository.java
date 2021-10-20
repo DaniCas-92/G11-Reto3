@@ -28,5 +28,7 @@ public class ScoreRepository {
     public Optional<Score> getScore(int idScore) {return scoreCrudRepository.findById(idScore);}
     
     public Score save(Score score) {return scoreCrudRepository.save(score);}
+  
+    public void delete(Score score) {scoreCrudRepository.delete(score);}
     
 }

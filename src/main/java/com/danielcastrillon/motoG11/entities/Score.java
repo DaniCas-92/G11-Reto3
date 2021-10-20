@@ -32,11 +32,11 @@ public class Score implements Serializable {
     @Column(name = "idScore")
     private Integer idScore;
     
-    @Column(name="qualification")
-    private Double qualification;
+    @Column(name="messageText")
+    private String messageText;
     
-    @Column(name="message")
-    private String message;
+    @Column(name="stars")
+    private Integer stars;
     
     @OneToOne
     @JoinColumn (name="reservation_id")
@@ -58,31 +58,31 @@ public class Score implements Serializable {
     }
 
     /**
-     * @return the qualification
+     * @return the stars
      */
-    public Double getQualification() {
-        return qualification;
+    public Integer getStars() {
+        return stars;
     }
 
     /**
-     * @param qualification the qualification to set
+     * @param stars the stars to set
      */
-    public void setQualification(Double qualification) {
-        this.qualification = qualification;
+    public void setStars(Integer stars) {
+        this.stars = stars;
     }
 
     /**
-     * @return the message
+     * @return the messageText
      */
-    public String getMessage() {
-        return message;
+    public String getMessageText() {
+        return messageText;
     }
 
     /**
-     * @param message the message to set
+     * @param messageText the messageText to set
      */
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     } 
 
     /**

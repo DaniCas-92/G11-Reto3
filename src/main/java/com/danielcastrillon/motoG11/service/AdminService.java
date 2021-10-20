@@ -16,33 +16,72 @@ import org.springframework.stereotype.Service;
  *
  * @author tec_danielc
  */
-
 @Service
 public class AdminService {
-    
+
     @Autowired
     AdminRepository adminRepository;
-    
-    public List<Admin> getAll() {return (List<Admin>) adminRepository.getAll();};
-  
-    public Optional<Admin> getAdmin(int id) {return adminRepository.getAdmin(id);};
-  
-    public Admin save(Admin admin) { 
-       if (admin.getIdAdmin()== null){
-           return adminRepository.save(admin);
-       }
-       else
-       {
-          Optional<Admin> ad =  adminRepository.getAdmin(admin.getIdAdmin());
-          if (ad.isEmpty()){
-              return adminRepository.save(admin);
-          }
-          else
-          {
-              return admin;
-          }
-       }
- 
+
+    public List<Admin> getAll() {
+        return (List<Admin>) adminRepository.getAll();
     }
-    
+  
+    public Optional<Admin> getAdmin(int id) {
+        return adminRepository.getAdmin(id);
+    }
+  
+    public Admin save(Admin admin) {
+        if (admin.getIdAdmin() == null) {
+            return adminRepository.save(admin);
+        } else {
+            Optional<Admin> ad = adminRepository.getAdmin(admin.getIdAdmin());
+            if (ad.isEmpty()) {
+                return adminRepository.save(admin);
+            } else {
+                return admin;
+            }
+        }
+
+    }
+
+    public Admin update(Admin admin) {
+        if (admin.getIdAdmin() != null) {
+            Optional<Admin> e = adminRepository.getAdmin(admin.getIdAdmin());
+            if (!e.isEmpty()) {
+                if (admin.getName() != null) {
+                    e.get().setName(admin.getName());
+                }
+                if (admin.getPassword()!= null) {
+                    e.get().setPassword(admin.getPassword());
+                }
+                /*if (admin.getEmail() != null) {
+                    e.get().setEmail(admin.getEmail());
+                }*/
+                adminRepository.save(e.get());
+                return e.get();
+            } else {
+                return admin;
+            }
+        } else {
+            return admin;
+        }
+    }
+
+    public boolean deleteAdmin(int id) {
+
+        /**
+         * alternativa de Delete Optional<Category> category =
+         * categoryRepository.getCategory(id); if (category.isEmpty()){ return
+         * false; } else { categoryRepository.delete(category.get()); return
+         * true; }
+         */
+        Boolean aBoolean = getAdmin(id).map(
+                admin -> {
+                    adminRepository.delete(admin);
+                    return true;
+                }).orElse(false);
+        return aBoolean;
+
+    }
+
 }

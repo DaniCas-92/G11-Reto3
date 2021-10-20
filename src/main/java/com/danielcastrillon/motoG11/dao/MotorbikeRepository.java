@@ -28,6 +28,6 @@ public class MotorbikeRepository {
     
     public Motorbike save(Motorbike motorbike) {return motoCrudRepository.save(motorbike);}
     
-    //public void delete(Motorbike motorbike){motoCrudRepository.delete(motorbike);}
+    public void delete(Motorbike motorbike){motoCrudRepository.delete(motorbike);}
     
 }

@@ -45,4 +45,44 @@ public class MessageService {
        }
  
     }
+
+    public Message update(Message message) {
+        if (message.getIdMessage()!= null) {
+            Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
+            if (!e.isEmpty()) {
+                if (message.getMessageText()!= null) {
+                    e.get().setMessageText(message.getMessageText());
+                }
+                /*if (message.getMotorbike()!= null) {
+                    e.get().setMotorbike(message.getMotorbike());
+                }
+                if (message.getClient()!= null) {
+                    e.get().setClient(message.getClient());
+                }*/
+                messageRepository.save(e.get());
+                return e.get();
+            } else {
+                return message;
+            }
+        } else {
+            return message;
+        }
+    }
+
+    public boolean deleteMessage(int id) {
+
+        /**
+         * alternativa de Delete Optional<Category> category =
+         * categoryRepository.getCategory(id); if (category.isEmpty()){ return
+         * false; } else { categoryRepository.delete(category.get()); return
+         * true; }
+         */
+        Boolean aBoolean = getMessage(id).map(
+                message -> {
+                    messageRepository.delete(message);
+                    return true;
+                }).orElse(false);
+        return aBoolean;
+
+    }
 }

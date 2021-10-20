@@ -21,41 +21,65 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
+ * Esta clase contiene los atributos y metodos para el producto
  * @author tec_danielc
+ * @version 1.0
  */
 
 @Entity
 @Table(name="motorbike")
 public class Motorbike implements Serializable {
     
+    /**
+     * Variable tipo int que denota el id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     
+    /**
+     * Variable tipo String que denota el name
+     */
     @Column(name = "name")
     private String name;
     
+    /**
+     * Variable tipo String que denota el brand
+     */
     @Column(name = "brand")
     private String brand;
     
+    /**
+     * Variable tipo int que denota el year
+     */
     @Column(name = "year")
     private Integer year;
     
+    /**
+     * Variable tipo String que denota la description
+     */
     @Column(name = "description")
     private String description;
-    
-    //@JsonIgnore
+     
+    /**
+     * Variable tipo Category que denota category
+     */
     @ManyToOne
     @JoinColumn(name="category_id")
     @JsonIgnoreProperties("motorbikes")
     private Category category;
-    
+     
+    /**
+     * Variable tipo Message que denota messages
+     */
     @OneToMany (cascade = {CascadeType.PERSIST}, mappedBy = "motorbike")
     @JsonIgnoreProperties({"motorbike","client"})
     private List<Message> messages;
-    
+     
+    /**
+     * Variable tipo Message que denota reservations
+     */
     @OneToMany (cascade = {CascadeType.PERSIST}, mappedBy = "motorbike")
     @JsonIgnoreProperties("motorbike")
     private List<Reservation> reservations;

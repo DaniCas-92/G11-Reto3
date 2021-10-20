@@ -16,62 +16,81 @@ import org.springframework.stereotype.Service;
  *
  * @author tec_danielc
  */
-
 @Service
 public class MotorbikeService {
+
     @Autowired
     MotorbikeRepository motorbikeRepository;
-    
-    public List<Motorbike> getAll() {return (List<Motorbike>) motorbikeRepository.getAll();}
-  
-    public Optional<Motorbike> getMotorbike(int id) {return motorbikeRepository.getMotorbike(id);}
-  
-    public Motorbike save(Motorbike motorbike) { 
-       if (motorbike.getId()== null){
-           return motorbikeRepository.save(motorbike);
-       }
-       else
-       {
-          Optional<Motorbike> mo =  motorbikeRepository.getMotorbike(motorbike.getId());
-          if (mo.isEmpty()){
-              return motorbikeRepository.save(motorbike);
-          }
-          else
-          {
-              return motorbike;
-          }
-       }
- 
+
+    public List<Motorbike> getAll() {
+        return (List<Motorbike>) motorbikeRepository.getAll();
     }
-    
-    /*public Motorbike update(Motorbike motorbike) { 
-       if (motorbike.getId()!= null){
-          Optional<Motorbike> mo =  motorbikeRepository.getMotorbike(motorbike.getId());
-          if (!mo.isEmpty()){
-              if(motorbike.getId()!= null){
-                  mo.get().setName(motorbike.getName());
-                  mo.get().setBrand(motorbike.getBrand());
-                  mo.get().setDescription(motorbike.getDescription());
-              }
-              return motorbikeRepository.save(mo.get());
-          }
-          else
-          {
-              return motorbike;
-          }
-       } else {
-           return motorbike;
-       }
- 
+
+    public Optional<Motorbike> getMotorbike(int id) {
+        return motorbikeRepository.getMotorbike(id);
     }
-    
-    public boolean deleteMotorbike(int id){
+
+    public Motorbike save(Motorbike motorbike) {
+        if (motorbike.getId() == null) {
+            return motorbikeRepository.save(motorbike);
+        } else {
+            Optional<Motorbike> mo = motorbikeRepository.getMotorbike(motorbike.getId());
+            if (mo.isEmpty()) {
+                return motorbikeRepository.save(motorbike);
+            } else {
+                return motorbike;
+            }
+        }
+
+    }
+
+    public Motorbike update(Motorbike motorbike) {
+        if (motorbike.getId() != null) {
+            Optional<Motorbike> mo = motorbikeRepository.getMotorbike(motorbike.getId());
+            if (!mo.isEmpty()) {
+                if (motorbike.getName()!= null) {
+                    mo.get().setName(motorbike.getName());
+                }
+                if (motorbike.getBrand()!= null) {
+                    mo.get().setBrand(motorbike.getBrand());
+                }
+                if (motorbike.getYear()!= null) {
+                    mo.get().setYear(motorbike.getYear());
+                }
+                if (motorbike.getDescription() != null) {
+                    mo.get().setDescription(motorbike.getDescription());
+                }
+                /*if (motorbike.getCategory()!= null) {
+                    mo.get().setCategory(motorbike.getCategory());
+                }
+                if (motorbike.getMessages()!= null) {
+                    mo.get().setMessages(motorbike.getMessages());
+                }
+                if (motorbike.getReservations()!= null) {
+                    mo.get().setReservations(motorbike.getReservations());
+                }*/
+                return motorbikeRepository.save(mo.get());
+            } else {
+                return motorbike;
+            }
+        } else {
+            return motorbike;
+        }
+
+    }
+
+    public boolean deleteMotorbike(int id) {
+        /**
+         * alternativa de Delete Optional<Category> category =
+         * categoryRepository.getCategory(id); if (category.isEmpty()){ return
+         * false; } else { categoryRepository.delete(category.get()); return
+         * true; }
+         */
         Boolean aBoolean = getMotorbike(id).map(
-                motorbike->{
+                motorbike -> {
                     motorbikeRepository.delete(motorbike);
                     return true;
-                }
-        ).orElse(false);
+                }).orElse(false);
         return aBoolean;
-    }*/
+    }
 }

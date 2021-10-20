@@ -44,5 +44,43 @@ public class ScoreService {
        }
  
     }
+
+    public Score update(Score score) {
+        if (score.getIdScore()!= null) {
+            Optional<Score> s = scoreRepository.getScore(score.getIdScore());
+            if (!s.isEmpty()) {
+                if (score.getStars()!= null) {
+                    s.get().setStars(score.getStars());
+                }
+                if (score.getMessageText()!= null) {
+                    s.get().setMessageText(score.getMessageText());
+                }
+                /*if (score.getReservation()!= null) {
+                    s.get().setReservation(score.getReservation());
+                }*/
+                return scoreRepository.save(s.get());
+            } else {
+                return score;
+            }
+        } else {
+            return score;
+        }
+
+    }
+
+    public boolean deleteScore(int id) {
+        /**
+         * alternativa de Delete Optional<Category> category =
+         * categoryRepository.getCategory(id); if (category.isEmpty()){ return
+         * false; } else { categoryRepository.delete(category.get()); return
+         * true; }
+         */
+        Boolean aBoolean = getScore(id).map(
+                score -> {
+                    scoreRepository.delete(score);
+                    return true;
+                }).orElse(false);
+        return aBoolean;
+    }
     
 }

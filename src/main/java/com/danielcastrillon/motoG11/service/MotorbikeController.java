@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,21 +33,25 @@ public class MotorbikeController {
     private MotorbikeService motorbikeService;
     
     @GetMapping("/all")
-      public List<Motorbike> getMotorbikes() {return motorbikeService.getAll();}
+    public List<Motorbike> getMotorbikes() {return motorbikeService.getAll();}
 
     @GetMapping("/{id}")
-      public Optional<Motorbike> getMotorbike(@PathVariable("id") int motorbikeId) {
-          return motorbikeService.getMotorbike(motorbikeId);
-      }
+    public Optional<Motorbike> getMotorbike(@PathVariable("id") int motorbikeId) {
+        return motorbikeService.getMotorbike(motorbikeId);
+    }
       
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-      public Motorbike save(@RequestBody Motorbike motorbike) {return motorbikeService.save(motorbike);}
-      
-    /*@PutMapping("/update")
-      public Motorbike update(@RequestBody Motorbike motorbike) {return motorbikeService.update(motorbike);}
-      
-    @DeleteMapping("/delete")
-      public boolean delete(@RequestBody Motorbike motorbike) {return motorbikeService.deleteMotorbike(motorbike.getId());}*/
+    public Motorbike save(@RequestBody Motorbike motorbike) {return motorbikeService.save(motorbike);}
+    
+    
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Motorbike update(@RequestBody Motorbike motorbike) {return motorbikeService.update(motorbike);}
+    
+    
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int motorbikeId) {return motorbikeService.deleteMotorbike(motorbikeId);}
     
 }

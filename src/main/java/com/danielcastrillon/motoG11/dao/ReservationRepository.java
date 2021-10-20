@@ -28,4 +28,6 @@ public class ReservationRepository {
     public Optional<Reservation> getReservation(int idReservation) {return reservationCrudRepository.findById(idReservation);}
     
     public Reservation save(Reservation reservation) {return reservationCrudRepository.save(reservation);}
+    
+    public void delete(Reservation reservation) {reservationCrudRepository.delete(reservation);}
 }
