@@ -40,7 +40,9 @@ function traerInformacion(){
 
 function guardarInformacion(){
 	if($('#messageText').val() !="" && $('#stars').val() !="" && $('#res').val() !="Seleccione..."){
-		let selected = $("#res").children(":selected").attr("value");
+            if($('#stars').val().length == 1 && ($('#stars').val()>= 0 && $('#stars').val()<=5)){
+        
+                let selected = $("#res").children(":selected").attr("value");
 
 		$.ajax({    
 			url : 'http://129.151.106.128/api/Reservation/'+selected,
@@ -86,6 +88,9 @@ function guardarInformacion(){
 				alert('ha sucedido un problema:'+ status);
 			}
 		});
+            } else {
+                    alert("La calificación debe ser un valor entero entre 0 y 5!");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -148,6 +153,7 @@ function editarRegistro (id){
 
 function actualizarInformacion(){	
 	if($('#name').val() !="" && $('#brand').val() !="" && $('#year').val() !="" && $('#description').val() !=""){
+            if($('#stars').val().length == 1 && ($('#stars').val()>= 0 && $('#stars').val()<=5)){
 		let misDatos = {
 			idScore: $("#idScore").val(),
 			stars: $("#stars").val(),
@@ -177,6 +183,9 @@ function actualizarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("La calificación debe ser un valor entero entre 0 y 5!");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}

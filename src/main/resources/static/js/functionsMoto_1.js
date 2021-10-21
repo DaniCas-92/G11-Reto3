@@ -1,7 +1,6 @@
 function traerInformacion(){
 	$.ajax({    
 		url : 'http://localhost/api/Motorbike/all',
-		//url : 'http://129.151.106.128/api/Motorbike/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -47,7 +46,8 @@ function traerInformacion(){
 
 function guardarInformacion(){
 	if($('#name').val() !="" && $('#brand').val() !="" && $('#year').val() !="" && $('#description').val() !="" && $('#cat').val() !="Seleccione..."){
-		let selected = $("#cat").children(":selected").attr("value");
+            if($('#year').val() >= 1980 && $('#year').val() <= 2022){
+                let selected = $("#cat").children(":selected").attr("value");
 		if (selected.length > 0) {
 			let misDatos = {
 				name: $("#name").val(),
@@ -61,7 +61,6 @@ function guardarInformacion(){
 			let datosJson = JSON.stringify(misDatos); 
 			$.ajax(    
 			'http://localhost/api/Motorbike/save',
-			//'http://129.151.106.128/api/Motorbike/save',
 			{data: datosJson,
 			type : 'POST',
 			dataType : 'json',
@@ -81,6 +80,9 @@ function guardarInformacion(){
 				}
 			});
 		}
+            } else {
+                    alert("El valor del año debe estar entre 1980 y 2022");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -89,7 +91,6 @@ function guardarInformacion(){
 function pintarSelect(id){
 	$.ajax({    
     url : 'http://localhost/api/Category/all',
-    //url : 'http://129.151.106.128/api/Category/all',
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -121,7 +122,6 @@ function editarRegistro (id){
 
 	$.ajax({    
     url : 'http://localhost/api/Motorbike/'+id,
-    //url : 'http://129.151.106.128/api/Motorbike/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -147,7 +147,8 @@ function editarRegistro (id){
 
 function actualizarInformacion(){
 	if($('#name').val() !="" && $('#brand').val() !="" && $('#year').val() !="" && $('#description').val() !="" && $('#cat').val() !="Seleccione..."){
-		let misDatos = {
+            if($('#year').val() >= 1980 && $('#year').val() <= 2022){
+                let misDatos = {
 			id: $("#id").val(),
 			name: $("#name").val(),
 			brand: $("#brand").val(),
@@ -158,7 +159,6 @@ function actualizarInformacion(){
 
 		$.ajax(    
 		'http://localhost/api/Motorbike/update',
-		//'http://129.151.106.128/api/Motorbike/update',
 		{data: datosJson,
 		type : 'PUT',
 		dataType : 'json',
@@ -181,6 +181,9 @@ function actualizarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("El valor del año debe estar entre 1980 y 2022");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -190,7 +193,6 @@ function eliminarRegistro(id){
 
 	$.ajax({    
 		url : 'http://localhost/api/Motorbike/'+id,
-		//url : 'http://129.151.106.128/api/Motorbike/'+id,
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -199,7 +201,6 @@ function eliminarRegistro(id){
 			if(respuesta.category == null || respuesta.messages == "" || respuesta.reservations == ""){
 				$.ajax( {   
 					url:'http://localhost/api/Motorbike/'+id,
-					//url:'http://129.151.106.128/api/Motorbike/'+id,
 					type : 'DELETE',
 					dataType : 'json',
 					contentType: "application/json; charset=utf-8",

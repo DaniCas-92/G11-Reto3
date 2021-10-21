@@ -1,7 +1,6 @@
 function traerInformacion(){
 	$.ajax({     
 		url : 'http://localhost/api/Client/all',
-		//url : 'http://129.151.106.128/api/Client/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -40,7 +39,8 @@ function traerInformacion(){
 
 function guardarInformacion(){
 	if($('#name').val() !="" && $('#email').val() !="" && $('#age').val() !="" && $('#password').val() !=""){
-		let misDatos = {
+            if($('#age').val() >= 15 && $('#age').val() <= 130){
+                let misDatos = {
 			name: $("#name").val(),
 			email: $("#email").val(),
 			age: $("#age").val(),
@@ -49,7 +49,6 @@ function guardarInformacion(){
 		let datosJson = JSON.stringify(misDatos); 
 		$.ajax(    
 		'http://localhost/api/Client/save',
-		//'http://129.151.106.128/api/Client/save',
 		{data: datosJson,
 		type : 'POST',
 		dataType : 'json',
@@ -67,6 +66,9 @@ function guardarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("La edad debe ser entre 15 y 130 años");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -76,7 +78,6 @@ function editarRegistro (id){
 
 	$.ajax({    
     url : 'http://localhost/api/Client/'+id,
-    //url : 'http://129.151.106.128/api/Client/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -100,6 +101,7 @@ function editarRegistro (id){
 
 function actualizarInformacion(){
 	if($('#name').val() !="" && $('#age').val() !="" && $('#password').val() !=""){
+            if($('#age').val() >= 15 && $('#age').val() <= 130){
 		let misDatos = {
 			idClient: $("#idClient").val(),
 			name: $("#name").val(),
@@ -110,7 +112,6 @@ function actualizarInformacion(){
 
 		$.ajax(    
 		'http://localhost/api/Client/update',
-		//'http://129.151.106.128/api/Client/update',
 		{data: datosJson,
 		type : 'PUT',
 		dataType : 'json',
@@ -132,6 +133,9 @@ function actualizarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("La edad debe ser entre 15 y 130 años");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -140,7 +144,6 @@ function actualizarInformacion(){
 function eliminarRegistro(id){
 	$.ajax( {   
     url:'http://localhost/api/Client/'+id,
-	//url:'http://129.151.106.128/api/Client/'+id,
     type : 'DELETE',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",

@@ -1,7 +1,6 @@
 function traerInformacion(){
 	$.ajax({        
-		url : 'http://localhost/api/Reservation/all',
-		//url : 'http://129.151.106.128/api/Reservation/all',
+                url : 'http://localhost/api/Reservation/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -71,7 +70,6 @@ function guardarInformacion(){
 				let datosJson = JSON.stringify(misDatos); 
 				$.ajax(   
 				'http://localhost/api/Reservation/save',
-				//'http://129.151.106.128/api/Reservation/save',
 				{data: datosJson,
 				type : 'POST',
 				dataType : 'json',
@@ -100,7 +98,6 @@ function guardarInformacion(){
 function pintarSelectClient(id){
 	$.ajax({    
     url : 'http://localhost/api/Client/all',
-    //url : 'http://129.151.106.128/api/Client/all',
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -129,7 +126,6 @@ function pintarSelectClient(id){
 function pintarSelectMoto(id){
 	$.ajax({    
     url : 'http://localhost/api/Motorbike/all',
-    //url : 'http://129.151.106.128/api/Motorbike/all',
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -160,7 +156,6 @@ function editarRegistro (id){
 
 	$.ajax({    
     url : 'http://localhost/api/Reservation/'+id,
-    //url : 'http://129.151.106.128/api/Reservation/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -204,7 +199,6 @@ function actualizarInformacion(){
 
 				$.ajax(    
 				'http://localhost/api/Reservation/update',
-				//'http://129.151.106.128/api/Reservation/update',
 				{data: datosJson,
 				type : 'PUT',
 				dataType : 'json',
@@ -246,7 +240,6 @@ function actualizarInformacion(){
 function eliminarRegistro(id){
 	$.ajax( {   
     url:'http://localhost/api/Reservation/'+id,
-	//url:'http://129.151.106.128/api/Reservation/'+id,
     type : 'DELETE',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",

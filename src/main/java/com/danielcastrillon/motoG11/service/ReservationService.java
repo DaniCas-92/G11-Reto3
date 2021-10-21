@@ -13,28 +13,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Esta clase contiene los métodos para el servicio de una reservación
  * @author tec_danielc
+ * @version 1.0
  */
 
 @Service
 public class ReservationService {
     
+    /*
+    * Objeto de la clase ReservationRepository
+    */
     @Autowired
     ReservationRepository reservationRepository;
     
+    /**
+     * Método que retorna una lista de reservaciones
+     * @return List<Reservation>  
+     */
     public List<Reservation> getAll() {return (List<Reservation>) reservationRepository.getAll();};
   
+    /**
+     * Método que retorna una reservación según el id
+     * @param idReservation
+     * @return Optional<Reservation>
+     */
     public Optional<Reservation> getReservation(int idReservation) {return reservationRepository.getReservation(idReservation);};
   
+    /**
+     * Método que hace el llamado para almacenar una reserva
+     * @param reservation
+     * @return Reservation
+     */
     public Reservation save(Reservation reservation) { 
        if (reservation.getIdReservation()== null){
            return reservationRepository.save(reservation);
        }
        else
        {
-          Optional<Reservation> re =  reservationRepository.getReservation(reservation.getIdReservation());
-          if (re.isEmpty()){
+          Optional<Reservation> reser =  reservationRepository.getReservation(reservation.getIdReservation());
+          if (reser.isEmpty()){
               return reservationRepository.save(reservation);
           }
           else
@@ -45,32 +63,25 @@ public class ReservationService {
  
     }
 
+    /**
+     * Método que actualiza una reserva solicitada
+     * @param reservation
+     * @return 
+     */
     public Reservation update(Reservation reservation) {
         if (reservation.getIdReservation()!= null) {
-            Optional<Reservation> r = reservationRepository.getReservation(reservation.getIdReservation());
-            if (!r.isEmpty()) {
+            Optional<Reservation> reser = reservationRepository.getReservation(reservation.getIdReservation());
+            if (!reser.isEmpty()) {
                 if (reservation.getStartDate()!= null) {
-                    r.get().setStartDate(reservation.getStartDate());
+                    reser.get().setStartDate(reservation.getStartDate());
                 }
                 if (reservation.getDevolutionDate()!= null) {
-                    r.get().setDevolutionDate(reservation.getDevolutionDate());
+                    reser.get().setDevolutionDate(reservation.getDevolutionDate());
                 }
                 if (reservation.getStatus()!= null) {
-                    r.get().setStatus(reservation.getStatus());
+                    reser.get().setStatus(reservation.getStatus());
                 }
-                /*if (reservation.getMotorbike()!= null) {
-                    r.get().setMotorbike(reservation.getMotorbike());
-                }
-                if (reservation.getClient()!= null) {
-                    r.get().setClient(reservation.getClient());
-                }
-                if (reservation.getScore()!= null) {
-                    r.get().setScore(reservation.getScore());
-                }
-                if (motorbike.getReservations()!= null) {
-                    mo.get().setReservations(motorbike.getReservations());
-                }*/
-                return reservationRepository.save(r.get());
+                return reservationRepository.save(reser.get());
             } else {
                 return reservation;
             }
@@ -80,14 +91,19 @@ public class ReservationService {
 
     }
 
-    public boolean deleteReservation(int id) {
+    /**
+     * Método que elimina una reserva según el id
+     * @param idReservation
+     * @return 
+     */
+    public boolean deleteReservation(int idReservation) {
         /**
          * alternativa de Delete Optional<Category> category =
          * categoryRepository.getCategory(id); if (category.isEmpty()){ return
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getReservation(id).map(
+        Boolean aBoolean = getReservation(idReservation).map(
                 reservation -> {
                     reservationRepository.delete(reservation);
                     return true;

@@ -1,7 +1,6 @@
 function traerInformacion(){
 	$.ajax({    
 		url : 'http://localhost/api/Category/all',
-		//url : 'http://129.151.106.128/api/Category/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -59,7 +58,6 @@ function guardarInformacion(){
 		let datosJson = JSON.stringify(misDatos); 
 		$.ajax(    
 		'http://localhost/api/Category/save',
-		//'http://129.151.106.128/api/Category/save',
 		{data: datosJson,
 		type : 'POST',
 		dataType : 'json',
@@ -93,7 +91,6 @@ function editarRegistro (id){
 
 	$.ajax({    
     url : 'http://localhost/api/Category/'+id,
-    //url : 'http://129.151.106.128/api/Category/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -124,7 +121,6 @@ function actualizarInformacion(){
 
 		$.ajax(    
 		'http://localhost/api/Category/update',
-		//'http://129.151.106.128/api/Category/update',
 		{data: datosJson,
 		type : 'PUT',
 		dataType : 'json',
@@ -152,7 +148,6 @@ function eliminarRegistro(id){
 
 	$.ajax({    
 		url : 'http://localhost/api/Category/'+id,
-		//url : 'http://129.151.106.128/api/Category/'+id,
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -161,7 +156,6 @@ function eliminarRegistro(id){
 			if(respuesta.motorbikes == ""){
 				$.ajax( {   
 					url:'http://localhost/api/Category/'+id,
-					//url:'http://129.151.106.128/api/Category/'+id,
 					type : 'DELETE',
 					dataType : 'json',
 					contentType: "application/json; charset=utf-8",

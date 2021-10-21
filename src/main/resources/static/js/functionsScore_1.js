@@ -1,7 +1,6 @@
 function traerInformacion(){
 	$.ajax({    
 		url : 'http://localhost/api/Score/all',
-		//url : 'http://129.151.106.128/api/Score/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -41,12 +40,12 @@ function traerInformacion(){
 
 function guardarInformacion(){
 	if($('#messageText').val() !="" && $('#stars').val() !="" && $('#res').val() !="Seleccione..."){
-		let selected = $("#res").children(":selected").attr("value");
-		let existeCalificacionReserva = false;
+            if($('#stars').val().length == 1 && ($('#stars').val()>= 0 && $('#stars').val()<=5)){
+        
+                let selected = $("#res").children(":selected").attr("value");
 
 		$.ajax({    
 			url : 'http://localhost/api/Reservation/'+selected,
-			//url : 'http://129.151.106.128/api/Score/'+selected,
 			type : 'GET',
 			dataType : 'json',
 			contentType: "application/json; charset=utf-8",
@@ -64,7 +63,6 @@ function guardarInformacion(){
 						let datosJson = JSON.stringify(misDatos); 
 						$.ajax(    
 						'http://localhost/api/Score/save',
-						//'http://129.151.106.128/api/Score/save',
 						{data: datosJson,
 						type : 'POST',
 						dataType : 'json',
@@ -90,6 +88,9 @@ function guardarInformacion(){
 				alert('ha sucedido un problema:'+ status);
 			}
 		});
+            } else {
+                    alert("La calificación debe ser un valor entero entre 0 y 5!");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -98,7 +99,6 @@ function guardarInformacion(){
 function pintarSelect(id){
 	$.ajax({    
     url : 'http://localhost/api/Reservation/all',
-    //url : 'http://129.151.106.128/api/Reservation/all',
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -130,7 +130,6 @@ function editarRegistro (id){
 
 	$.ajax({    
     url : 'http://localhost/api/Score/'+id,
-    //url : 'http://129.151.106.128/api/Score/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -154,6 +153,7 @@ function editarRegistro (id){
 
 function actualizarInformacion(){	
 	if($('#name').val() !="" && $('#brand').val() !="" && $('#year').val() !="" && $('#description').val() !=""){
+            if($('#stars').val().length == 1 && ($('#stars').val()>= 0 && $('#stars').val()<=5)){
 		let misDatos = {
 			idScore: $("#idScore").val(),
 			stars: $("#stars").val(),
@@ -163,7 +163,6 @@ function actualizarInformacion(){
 
 		$.ajax(    
 		'http://localhost/api/Score/update',
-		//'http://129.151.106.128/api/Score/update',
 		{data: datosJson,
 		type : 'PUT',
 		dataType : 'json',
@@ -184,6 +183,9 @@ function actualizarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("La calificación debe ser un valor entero entre 0 y 5!");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -192,7 +194,6 @@ function actualizarInformacion(){
 function eliminarRegistro(id){
 	$.ajax( {   
     url:'http://localhost/api/Score/'+id,
-	//url:'http://129.151.106.128/api/Score/'+id,
     type : 'DELETE',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
