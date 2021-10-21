@@ -39,7 +39,8 @@ function traerInformacion(){
 
 function guardarInformacion(){
 	if($('#name').val() !="" && $('#email').val() !="" && $('#age').val() !="" && $('#password').val() !=""){
-		let misDatos = {
+            if($('#age').val() >= 15 && $('#age').val() <= 130){
+                let misDatos = {
 			name: $("#name").val(),
 			email: $("#email").val(),
 			age: $("#age").val(),
@@ -65,6 +66,9 @@ function guardarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("La edad debe ser entre 15 y 130 años");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -97,6 +101,7 @@ function editarRegistro (id){
 
 function actualizarInformacion(){
 	if($('#name').val() !="" && $('#age').val() !="" && $('#password').val() !=""){
+            if($('#age').val() >= 15 && $('#age').val() <= 130){
 		let misDatos = {
 			idClient: $("#idClient").val(),
 			name: $("#name").val(),
@@ -128,6 +133,9 @@ function actualizarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("La edad debe ser entre 15 y 130 años");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}

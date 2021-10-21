@@ -46,7 +46,8 @@ function traerInformacion(){
 
 function guardarInformacion(){
 	if($('#name').val() !="" && $('#brand').val() !="" && $('#year').val() !="" && $('#description').val() !="" && $('#cat').val() !="Seleccione..."){
-		let selected = $("#cat").children(":selected").attr("value");
+            if($('#year').val() >= 1980 && $('#year').val() <= 2022){
+                let selected = $("#cat").children(":selected").attr("value");
 		if (selected.length > 0) {
 			let misDatos = {
 				name: $("#name").val(),
@@ -79,6 +80,9 @@ function guardarInformacion(){
 				}
 			});
 		}
+            } else {
+                    alert("El valor del año debe estar entre 1980 y 2022");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
@@ -143,7 +147,8 @@ function editarRegistro (id){
 
 function actualizarInformacion(){
 	if($('#name').val() !="" && $('#brand').val() !="" && $('#year').val() !="" && $('#description').val() !="" && $('#cat').val() !="Seleccione..."){
-		let misDatos = {
+            if($('#year').val() >= 1980 && $('#year').val() <= 2022){
+                let misDatos = {
 			id: $("#id").val(),
 			name: $("#name").val(),
 			brand: $("#brand").val(),
@@ -176,6 +181,9 @@ function actualizarInformacion(){
 				}
 			}
 		});
+            } else {
+                    alert("El valor del año debe estar entre 1980 y 2022");
+            }
 	} else {
 		alert("Se deben llenar todos los campos!");
 	}
