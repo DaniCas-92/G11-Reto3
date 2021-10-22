@@ -37,6 +37,7 @@ function traerInformacion(){
 			miTabla += '</table>';
 			$("#resultado").append(miTabla);      
 			pintarSelect();
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + xhr.responseText);
@@ -69,12 +70,6 @@ function guardarInformacion(){
 			statusCode : {
 				201 :  function() {
 					alert("Motocicleta guardada!");
-					$("#id").val("");
-					$("#name").val("");
-					$("#brand").val("");
-					$("#year").val("");
-					$("#description").val("");
-					$("#cat").empty();
 					traerInformacion();	
 					}
 				}
@@ -167,16 +162,6 @@ function actualizarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Motocicleta actualizada!");
-				$("#id").val("");
-				$("#name").val("");
-				$("#brand").val("");
-				$("#year").val("");
-				$("#description").val("");
-				$("#cat").val("");
-				$("#cat").attr("disabled", false);
-
-				$("#guardar").attr('disabled', false);
-				$("#actualizar").attr('disabled', true);
 				traerInformacion();	
 				}
 			}
@@ -198,7 +183,7 @@ function eliminarRegistro(id){
 		contentType: "application/json; charset=utf-8",
 	  
 		success : function(respuesta) {	
-			if(respuesta.category == null || respuesta.messages == "" || respuesta.reservations == ""){
+			if(respuesta.messages == "" && respuesta.reservations == ""){
 				$.ajax( {   
 					url:'http://129.151.106.128/api/Motorbike/'+id,
 					type : 'DELETE',
@@ -208,14 +193,6 @@ function eliminarRegistro(id){
 					statusCode : {
 						204 :  function() {
 							alert("Motocicleta eliminada!");
-							$("#id").val("");
-							$("#name").val("");
-							$("#brand").val("");
-							$("#year").val("");
-							$("#description").val("");
-							
-							$("#guardar").attr('disabled', false);
-							$("#actualizar").attr('disabled', true);
 							traerInformacion();	
 							}
 						}
@@ -230,4 +207,19 @@ function eliminarRegistro(id){
 	});
 
 
-}	
+}
+
+function limpiarCampos(){
+    
+	$("#id").val("");
+	$("#name").val("");
+	$("#brand").val("");
+	$("#year").val("");
+	$("#description").val("");
+	$("#cat").val("");
+	$("#cat").attr("disabled", false);
+
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
+    
+}

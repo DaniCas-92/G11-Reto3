@@ -44,6 +44,7 @@ function traerInformacion(){
 			$("#resultado").append(miTabla);        
 			pintarSelectClient(); 
 			pintarSelectMoto();
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + json);
@@ -78,10 +79,6 @@ function guardarInformacion(){
 				statusCode : {
 					201 :  function() {
 						alert("Reserva guardada!");
-						$("#idReservation").val("");
-						$("#startDate").val("");
-						fechaActual();
-						$("#devolutionDate").val("");
 						traerInformacion();	
 						}
 					}
@@ -207,23 +204,6 @@ function actualizarInformacion(){
 				statusCode : {
 					201 :  function() {
 						alert("Reservación actualizada!");
-						$("#idReservation").val("");
-						$("#startDate").val("");
-						fechaActual();
-						$("#devolutionDate").val("");
-
-						$("#mot").val("");
-						$("#cli").val("");
-						$("#mot").attr("disabled", false);
-						$("#cli").attr("disabled", false);
-						
-						$("#status").empty();
-						selectStatus = '<option value="created" selected>Creado</option>';	
-						$("#status").attr("disabled", true);			
-						$("#status").append(selectStatus);    
-
-						$("#guardar").attr('disabled', false);
-						$("#actualizar").attr('disabled', true);
 						traerInformacion();	
 						}
 					}
@@ -247,24 +227,7 @@ function eliminarRegistro(id){
     statusCode : {
 		204 :  function() {
 			alert("Reservación eliminada!");
-			$("#idReservation").val("");
-			$("#startDate").val("");
-			fechaActual();
-			$("#devolutionDate").val("");
-
-			$("#mot").val("");
-			$("#cli").val("");
-			$("#mot").attr("disabled", false);
-			$("#cli").attr("disabled", false);
-						
-			$("#status").empty();
-			selectStatus = '<option value="created" selected>Creado</option>';	
-			$("#status").attr("disabled", true);			
-			$("#status").append(selectStatus);  
-
-			$("#guardar").attr('disabled', false);
-			$("#actualizar").attr('disabled', true);
-        	traerInformacion();	
+                        traerInformacion();	
 			}
 		}
 	});
@@ -320,3 +283,24 @@ $(document).ready(function () {
 
 	$('#startDate').val(today);
 });
+
+function limpiarCampos(){
+    
+	$("#idReservation").val("");
+	$("#startDate").val("");
+	fechaActual();
+	$("#devolutionDate").val("");
+
+	$("#mot").val("");
+	$("#cli").val("");
+        $("#mot").attr("disabled", false);
+	$("#cli").attr("disabled", false);
+						
+        $("#status").empty();
+	selectStatus = '<option value="created" selected>Creado</option>';	
+	$("#status").attr("disabled", true);			
+	$("#status").append(selectStatus);    
+
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
+}

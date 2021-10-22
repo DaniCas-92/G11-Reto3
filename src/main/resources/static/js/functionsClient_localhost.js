@@ -30,6 +30,7 @@ function traerInformacion(){
 			}
 			miTabla += '</table>';
 			$("#resultado").append(miTabla);    
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + json);
@@ -57,11 +58,6 @@ function guardarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Cliente guardado!");
-				$("#idClient").val("");
-				$("#name").val("");
-				$("#email").val("");
-				$("#age").val("");
-				$("#password").val("");
 				traerInformacion();	
 				}
 			}
@@ -120,15 +116,6 @@ function actualizarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Cliente actualizado!");
-				$("#id").val("");
-				$("#name").val("");
-				$("#age").val("");
-				$("#password").val("");
-				$("#email").val("");
-				$("#email").attr("disabled", false);
-
-				$("#guardar").attr('disabled', false);
-				$("#actualizar").attr('disabled', true);
 				traerInformacion();	
 				}
 			}
@@ -142,26 +129,47 @@ function actualizarInformacion(){
 }
 
 function eliminarRegistro(id){
-	$.ajax( {   
-    url:'http://localhost/api/Client/'+id,
-    type : 'DELETE',
-    dataType : 'json',
-    contentType: "application/json; charset=utf-8",
-  
-    statusCode : {
-		204 :  function() {
-			alert("Cliente eliminado!");
-			$("#id").val("");
-			$("#name").val("");
-			$("#age").val("");
-			$("#password").val("");
-			$("#email").val("");
-			$("#email").attr("disabled", false);
-			
-			$("#guardar").attr('disabled', false);
-			$("#actualizar").attr('disabled', true);
-        	traerInformacion();	
+      
+    $.ajax({    
+		url : 'http://localhost/api/Client/'+id,
+		type : 'GET',
+		dataType : 'json',
+		contentType: "application/json; charset=utf-8",
+	  
+		success : function(respuesta) {	
+			if(respuesta.messages == "" && respuesta.reservations == ""){
+				$.ajax( {   
+					url:'http://localhost/api/Client/'+id,
+					type : 'DELETE',
+					dataType : 'json',
+					contentType: "application/json; charset=utf-8",
+				  
+					statusCode : {
+						204 :  function() {
+							alert("Cliente eliminado!");
+							traerInformacion();	
+							}
+						}
+					});
+			} else {
+				alert("No se puede eliminar este cliente, ya que posee relación con otras tablas!");
 			}
+		},
+		error : function(xhr, status) {
+			alert('ha sucedido un problema:'+ status);
 		}
 	});
 }	
+
+function limpiarCampos(){
+    
+	$("#id").val("");
+	$("#name").val("");
+	$("#age").val("");
+	$("#password").val("");
+	$("#email").val("");
+	$("#email").attr("disabled", false);
+
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
+}

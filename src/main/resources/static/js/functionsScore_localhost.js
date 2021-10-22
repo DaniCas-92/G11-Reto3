@@ -13,8 +13,8 @@ function traerInformacion(){
 			//miTabla += '<th>ID</th>';
 			miTabla += '<th>Calificación</th>';
 			miTabla += '<th>Mensaje</th>';
-			miTabla += '<th>Acción 1</th>';
-			miTabla += '<th>Acción 2</th>';
+			miTabla += '<th>Acción</th>';
+			//miTabla += '<th>Acción 2</th>';
 			miTabla += '<th>id Reservación</th>';
 			miTabla += '</tr>';
 			for (i=0; i<respuesta.length; i++){
@@ -23,14 +23,15 @@ function traerInformacion(){
 				miTabla += '<td>'+ respuesta[i].stars+ '</td>';
 				miTabla += '<td>'+ respuesta[i].messageText+ '</td>';
 				miTabla += '<td><button onclick="editarRegistro('+respuesta[i].idScore+' )">Editar</button>';
-				miTabla += '<td><button onclick="eliminarRegistro('+respuesta[i].idScore+' )">Eliminar</button>';
+				//miTabla += '<td><button onclick="eliminarRegistro('+respuesta[i].idScore+' )">Eliminar</button>';
 				miTabla += '<td>'+ respuesta[i].reservation.idReservation+ '</td>';
 				miTabla += '</tr>';
 	
 			}
 			miTabla += '</table>';
 			$("#resultado").append(miTabla);      
-			pintarSelect();
+			pintarSelect();                    
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + xhr.responseText);
@@ -171,14 +172,6 @@ function actualizarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Calificación actualizada!");
-				$("#idScore").val("");
-				$("#stars").val("");
-				$("#messageText").val("");
-				$("#res").val("");
-				$("#res").attr("disabled", false);
-
-				$("#guardar").attr('disabled', false);
-				$("#actualizar").attr('disabled', true);
 				traerInformacion();	
 				}
 			}
@@ -191,27 +184,39 @@ function actualizarInformacion(){
 	}
 }
 
-function eliminarRegistro(id){
-	$.ajax( {   
-    url:'http://localhost/api/Score/'+id,
-    type : 'DELETE',
-    dataType : 'json',
-    contentType: "application/json; charset=utf-8",
-  
-    statusCode : {
-		204 :  function() {
-			alert("Calificación eliminada!");
-			$("#idScore").val("");
-			$("#stars").val("");
-			$("#messageText").val("");
-			
-			$("#res").val("");
-			$("#res").attr("disabled", false);
-			
-			$("#guardar").attr('disabled', false);
-			$("#actualizar").attr('disabled', true);
-        	traerInformacion();	
-			}
-		}
-	});
-}	
+function limpiarCampos(){
+    
+        $("#idScore").val("");
+        $("#stars").val("");
+	$("#messageText").val("");
+	$("#res").val("");
+	$("#res").attr("disabled", false);
+
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
+}
+
+//function eliminarRegistro(id){
+//	$.ajax( {   
+//    url:'http://localhost/api/Score/'+id,
+//    type : 'DELETE',
+//    dataType : 'json',
+//    contentType: "application/json; charset=utf-8",
+//  
+//    statusCode : {
+//		204 :  function() {
+//			alert("Calificación eliminada!");
+//			$("#idScore").val("");
+//			$("#stars").val("");
+//			$("#messageText").val("");
+//			
+//			$("#res").val("");
+//			$("#res").attr("disabled", false);
+//			
+//			$("#guardar").attr('disabled', false);
+//			$("#actualizar").attr('disabled', true);
+//        	traerInformacion();	
+//			}
+//		}
+//	});
+//}	

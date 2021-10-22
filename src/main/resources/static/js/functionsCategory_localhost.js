@@ -41,6 +41,7 @@ function traerInformacion(){
 			}
 			miTabla += '</table>';
 			$("#resultado").append(miTabla); 
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + xhr.responseText);
@@ -66,14 +67,6 @@ function guardarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Categoria guardada!");
-				/*alertify.confirm("Categoria guardada",
-					function() {
-						alertify.success('Ok');
-					}
-				);*/
-				//$("#id").val("");
-				$("#name").val("");
-				$("#description").val("");
 				traerInformacion();	
 				}
 			}
@@ -129,12 +122,6 @@ function actualizarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Categoria actualizada!");
-				$("#id").val("");
-				$("#name").val("");
-				$("#description").val("");
-
-				$("#guardar").attr('disabled', false);
-				$("#actualizar").attr('disabled', true);
 				traerInformacion();	
 				}
 			}
@@ -163,12 +150,6 @@ function eliminarRegistro(id){
 					statusCode : {
 						204 :  function() {
 							alert("Categoria eliminada!");
-							$("#id").val("");
-							$("#name").val("");
-							$("#description").val("");
-							
-							$("#guardar").attr('disabled', false);
-							$("#actualizar").attr('disabled', true);
 							traerInformacion();	
 							}
 						}
@@ -182,4 +163,14 @@ function eliminarRegistro(id){
 		}
 	});
 
+}
+
+function limpiarCampos(){
+    
+	$("#id").val("");
+        $("#name").val("");
+	$("#description").val("");
+							
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
 }

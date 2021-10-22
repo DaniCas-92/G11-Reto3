@@ -29,7 +29,8 @@ function traerInformacion(){
 	
 			}
 			miTabla += '</table>';
-			$("#resultado").append(miTabla);    
+			$("#resultado").append(miTabla); 
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + json);
@@ -55,10 +56,6 @@ function guardarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Admin guardado!");
-				$("#idAdmin").val("");
-				$("#name").val("");
-				$("#email").val("");
-				$("#password").val("");
 				traerInformacion();	
 				}
 			}
@@ -114,14 +111,6 @@ function actualizarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Admin actualizado!");
-				$("#idAdmin").val("");
-				$("#name").val("");
-				$("#password").val("");
-				$("#email").val("");
-				$("#email").attr("disabled", false);
-
-				$("#guardar").attr('disabled', false);
-				$("#actualizar").attr('disabled', true);
 				traerInformacion();	
 				}
 			}
@@ -141,16 +130,20 @@ function eliminarRegistro(id){
     statusCode : {
 		204 :  function() {
 			alert("Admin eliminado!");
-			$("#idAdmin").val("");
-			$("#name").val("");
-			$("#password").val("");
-			$("#email").val("");
-			$("#email").attr("disabled", false);
-			
-			$("#guardar").attr('disabled', false);
-			$("#actualizar").attr('disabled', true);
         	traerInformacion();	
 			}
 		}
 	});
+}	
+
+function limpiarCampos(){
+    
+	$("#idAdmin").val("");
+	$("#name").val("");
+	$("#password").val("");
+	$("#email").val("");
+	$("#email").attr("disabled", false);
+			
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
 }	

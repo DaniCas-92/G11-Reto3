@@ -36,6 +36,7 @@ function traerInformacion(){
 			$("#resultado").append(miTabla);        
 			pintarSelectClient(); 
 			pintarSelectMoto();
+                        limpíarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + json);
@@ -68,10 +69,6 @@ function guardarInformacion(){
 			statusCode : {
 				201 :  function() {
 					alert("Mensaje guardado!");
-					$("#idMessage").val("");
-					$("#messageText").val("");
-					$("#mot").val("");
-					$("#cli").val("");
 					traerInformacion();	
 					}
 				}
@@ -187,16 +184,6 @@ function actualizarInformacion(){
 		statusCode : {
 			201 :  function() {
 				alert("Mensaje actualizado!");
-				$("#idMessage").val("");
-				$("#messageText").val("");
-
-				$("#mot").val("");
-				$("#cli").val("");
-				$("#mot").attr("disabled", false);
-				$("#cli").attr("disabled", false);
-
-				$("#guardar").attr('disabled', false);
-				$("#actualizar").attr('disabled', true);
 				traerInformacion();	
 				}
 			}
@@ -216,18 +203,22 @@ function eliminarRegistro(id){
     statusCode : {
 		204 :  function() {
 			alert("Mensaje eliminado!");
-			$("#idMessage").val("");
-			$("#messageText").val("");
-
-			$("#mot").val("");
-			$("#cli").val("");
-			$("#mot").attr("disabled", false);
-			$("#cli").attr("disabled", false);
-
-			$("#guardar").attr('disabled', false);
-			$("#actualizar").attr('disabled', true);
-        	traerInformacion();	
+                        traerInformacion();	
 			}
 		}
 	});
 }	
+
+function limpiarCampos(){
+    
+	$("#idMessage").val("");
+	$("#messageText").val("");
+
+	$("#mot").val("");
+	$("#cli").val("");
+	$("#mot").attr("disabled", false);
+	$("#cli").attr("disabled", false);
+
+	$("#guardar").attr('disabled', false);
+	$("#actualizar").attr('disabled', true);
+}
