@@ -36,7 +36,7 @@ function traerInformacion(){
 			$("#resultado").append(miTabla);        
 			pintarSelectClient(); 
 			pintarSelectMoto();
-                        limpíarCampos();
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + json);
