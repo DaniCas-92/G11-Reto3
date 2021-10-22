@@ -30,7 +30,7 @@ function traerInformacion(){
 			}
 			miTabla += '</table>';
 			$("#resultado").append(miTabla);  
-                        limpíarCampos();
+                        limpiarCampos();
 		},
 		error : function(xhr, status) {
 			alert('Ha sucedido un problema:'+ status + json);
