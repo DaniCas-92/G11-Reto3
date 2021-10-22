@@ -75,12 +75,11 @@ public class ScoreService {
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getScore(id).map(
+        return getScore(id).map(
                 score -> {
                     scoreRepository.delete(score);
                     return true;
                 }).orElse(false);
-        return aBoolean;
     }
     
 }

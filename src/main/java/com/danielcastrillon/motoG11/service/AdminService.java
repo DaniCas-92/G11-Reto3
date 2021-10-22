@@ -75,12 +75,11 @@ public class AdminService {
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getAdmin(id).map(
+        return getAdmin(id).map(
                 admin -> {
                     adminRepository.delete(admin);
                     return true;
                 }).orElse(false);
-        return aBoolean;
 
     }
 

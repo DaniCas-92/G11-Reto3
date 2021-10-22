@@ -85,12 +85,11 @@ public class ClientService {
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getClient(id).map(
+        return getClient(id).map(
                 client -> {
                     clientRepository.delete(client);
                     return true;
                 }).orElse(false);
-        return aBoolean;
 
     }
 }

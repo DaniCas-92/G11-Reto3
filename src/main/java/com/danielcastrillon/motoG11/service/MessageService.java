@@ -77,12 +77,11 @@ public class MessageService {
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getMessage(id).map(
+        return getMessage(id).map(
                 message -> {
                     messageRepository.delete(message);
                     return true;
                 }).orElse(false);
-        return aBoolean;
 
     }
 }

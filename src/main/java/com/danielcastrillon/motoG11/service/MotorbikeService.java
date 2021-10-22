@@ -86,11 +86,10 @@ public class MotorbikeService {
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getMotorbike(id).map(
+        return getMotorbike(id).map(
                 motorbike -> {
                     motorbikeRepository.delete(motorbike);
                     return true;
                 }).orElse(false);
-        return aBoolean;
     }
 }

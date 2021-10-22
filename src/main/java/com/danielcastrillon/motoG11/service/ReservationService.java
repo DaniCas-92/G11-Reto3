@@ -21,39 +21,39 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReservationService {
     
-    /*
-    * Objeto de la clase ReservationRepository
-    */
+    /**
+     * Objeto de la clase ReservationRepository
+     */
     @Autowired
-    ReservationRepository reservationRepository;
+    ReservationRepository resRepository;
     
     /**
      * Método que retorna una lista de reservaciones
-     * @return List<Reservation>  
+     * @return  
      */
-    public List<Reservation> getAll() {return (List<Reservation>) reservationRepository.getAll();};
+    public List<Reservation> getAll() {return (List<Reservation>) resRepository.getAll();};
   
     /**
      * Método que retorna una reservación según el id
      * @param idReservation
-     * @return Optional<Reservation>
+     * @return
      */
-    public Optional<Reservation> getReservation(int idReservation) {return reservationRepository.getReservation(idReservation);};
+    public Optional<Reservation> getReservation(int idReservation) {return resRepository.getReservation(idReservation);};
   
     /**
      * Método que hace el llamado para almacenar una reserva
      * @param reservation
-     * @return Reservation
+     * @return
      */
     public Reservation save(Reservation reservation) { 
        if (reservation.getIdReservation()== null){
-           return reservationRepository.save(reservation);
+           return resRepository.save(reservation);
        }
        else
        {
-          Optional<Reservation> reser =  reservationRepository.getReservation(reservation.getIdReservation());
+          Optional<Reservation> reser =  resRepository.getReservation(reservation.getIdReservation());
           if (reser.isEmpty()){
-              return reservationRepository.save(reservation);
+              return resRepository.save(reservation);
           }
           else
           {
@@ -70,7 +70,7 @@ public class ReservationService {
      */
     public Reservation update(Reservation reservation) {
         if (reservation.getIdReservation()!= null) {
-            Optional<Reservation> reser = reservationRepository.getReservation(reservation.getIdReservation());
+            Optional<Reservation> reser = resRepository.getReservation(reservation.getIdReservation());
             if (!reser.isEmpty()) {
                 if (reservation.getStartDate()!= null) {
                     reser.get().setStartDate(reservation.getStartDate());
@@ -81,7 +81,7 @@ public class ReservationService {
                 if (reservation.getStatus()!= null) {
                     reser.get().setStatus(reservation.getStatus());
                 }
-                return reservationRepository.save(reser.get());
+                return resRepository.save(reser.get());
             } else {
                 return reservation;
             }
@@ -103,11 +103,10 @@ public class ReservationService {
          * false; } else { categoryRepository.delete(category.get()); return
          * true; }
          */
-        Boolean aBoolean = getReservation(idReservation).map(
+        return getReservation(idReservation).map(
                 reservation -> {
-                    reservationRepository.delete(reservation);
+                    resRepository.delete(reservation);
                     return true;
                 }).orElse(false);
-        return aBoolean;
     }
 }
