@@ -15,8 +15,11 @@ function traerInformacion(){
 									<h5 class ="card-title">  ${respuesta[i].id} - ${respuesta[i].brand}</h5> 		
 								    <h6 class ="card-subtitle mb-2 text-muted">  ${respuesta[i].name}</h6> 		
 								    <h6 class ="card-subtitle mb-2 text-muted">  ${respuesta[i].description} </h6>
-									<p class= "card-text"> ${respuesta[i].year} <br> 		
-														  ${respuesta[i].category.name}</p>
+									<p class= "card-text"> ${respuesta[i].year} `;
+                                if(respuesta[i].category!=null){
+                                                miTabla += `<br> ${respuesta[i].category.name}`;
+                                }
+                                                miTabla +=          `</p>
 									<button class="btn btn-primary" onclick="editarRegistro(${respuesta[i].id} )" ><i class="material-icons">&#xE254;</i>Editar</button>
 								    <button  class="btn btn-danger" onclick="eliminarRegistro(${respuesta[i].id} )"><i class="material-icons">&#xE872;</i>Borrar</button>
 								</div>
