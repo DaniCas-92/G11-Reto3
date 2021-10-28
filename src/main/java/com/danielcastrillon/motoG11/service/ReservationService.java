@@ -116,12 +116,22 @@ public class ReservationService {
                 }).orElse(false);
     }
     
+    /**
+     * Método que cuenta Reservascompletadas vs canceladas
+     * @return 
+     */
     public StatusReservas getReportStatusReservation(){
         List<Reservation> completed = resRepository.reservationStatus("completed");
         List<Reservation> cancelled = resRepository.reservationStatus("cancelled");
         return new StatusReservas(completed.size(), cancelled.size());
     }
     
+    /**
+     * Método que hace el conteo de reservas por un intervalo de tiempo
+     * @param dateA
+     * @param dateB
+     * @return 
+     */
     public List<Reservation> getReportDateReservation(String dateA, String dateB){
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
         Date datoUno = new Date();
@@ -140,6 +150,10 @@ public class ReservationService {
         }
     }
     
+    /**
+     * Método que genera el top de los mejores clientes
+     * @return 
+     */
     public List<CountClients> servicioTopClients(){
         return resRepository.getTopClients();
     } 
