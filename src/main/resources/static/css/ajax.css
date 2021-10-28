@@ -1,28 +1,24 @@
 body {
     padding: 0px;
     margin: 0px;
-    background-color: #808080;
+    background-color: #F5F5F5;
     text-align: center;
 }
 
 h1 {
-    background-color: #606060;
+    background-color: #E0E0E0;
     color: white;
     margin: 0px 0px 30px 0px;
     padding: 20px;
     text-align: center;
-    text-shadow: 5px 5px 5px black;
-    box-shadow: 5px 5px 5px black;
 }
 
 h2 {
-    background-color: #606060;
+    background-color: #E0E0E0;
     color: white;
     margin: 0px 0px 30px 0px;
-    padding: 15px;
+    padding: 14px;
     text-align: center;
-    text-shadow: 5px 5px 5px black;
-    box-shadow: 5px 5px 5px black;
 }
 
 button {
@@ -30,6 +26,7 @@ button {
     border-radius: 10px;
     padding: 10px;
     font-size: 16px;
+    background-color:#8CB3E4;
     border: 2px solid black;
 }
 
@@ -47,25 +44,6 @@ button:active {
     border: 2px dashed black;
 }
 
-table {
-	border: 1px solid #000;
-}
-
-th, td {
-   text-align: center;
-   vertical-align: middle;
-   border: 1px solid #000;
-}
-
-div.centraTabla{
-	text-align: center;
-}
-
-div.centraTabla table {
-	margin: 0 auto;
-	text-align: left;
-}
-
 nav a{
       text-decoration:none;
       color:inherit;
@@ -75,9 +53,9 @@ nav a{
 nav li{
       display:inline-block;
       width:150px;
-      height:30px;
+      height:40px;
       padding:5px 10px;
-      background-color:#000;
+      background-color:#669CB8;
       border:1px solid #000;
       text-align:center;
       color:#fff;

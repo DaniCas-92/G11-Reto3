@@ -6,45 +6,35 @@ function traerInformacion(){
 		contentType: "application/json; charset=utf-8",
   
 		success : function(respuesta) {
-			console.log(respuesta);
+			
 			$("#resultado").empty();
-			let miTabla = '<table>';
-			miTabla += '<tr>';
-			//miTabla += '<th>ID</th>';
-			miTabla += '<th>Nombre Categoria</th>';
-			miTabla += '<th>Descripción Categoria</th>';
-			miTabla += '<th>Acción 1</th>';
-			miTabla += '<th>Acción 2</th>';
-			miTabla += '<th>Nombre Moto</th>';
-			miTabla += '<th>Marca Moto</th>';
-			miTabla += '<th>Descripción Moto</th>';
-			miTabla += '</tr>';
+			let miTabla = '<div class="container"><div  class= "row">';
 			for (i=0; i<respuesta.length; i++){
-				miTabla += '<tr>';
-				//miTabla += '<td>'+ respuesta[i].id+ '</td>';
-				miTabla += '<td>'+ respuesta[i].name+ '</td>';
-				miTabla += '<td>'+ respuesta[i].description+ '</td>';
-				miTabla += '<td><button onclick="editarRegistro('+respuesta[i].id+' )">Editar</button>';
-				miTabla += '<td><button onclick="eliminarRegistro('+respuesta[i].id+' )">Eliminar</button>';				
+				miTabla += ` <div class="card m-2" >
+								<div class="card-body" >
+									<h5 class ="card-title">  ${respuesta[i].id} - ${respuesta[i].name}</h5> 		
+								    <h6 class ="card-subtitle mb-2 text-muted">  ${respuesta[i].description} </h6> 		
+								    
+									<p class= "card-text"> `;
 				for (j=0; j<respuesta[i].motorbikes.length; j++){
-					if(j>=1){
-						miTabla += '</tr>';
-						miTabla += '<td>'+ respuesta[i].name+ '</td>';
-						miTabla += '<td>'+ respuesta[i].description+ '</td>';
-					}
-					miTabla += '<td>'+ respuesta[i].motorbikes[j].name+ '</td>';
-					miTabla += '<td>'+ respuesta[i].motorbikes[j].brand+ '</td>';
-					miTabla += '<td>'+ respuesta[i].motorbikes[j].description+ '</td>';
+					let conteo = j+1;
+					miTabla += conteo +`. ${respuesta[i].motorbikes[j].name} - 		
+									${respuesta[i].motorbikes[j].brand}	<br>`;
 				}
-				miTabla += '</tr>';
-	
+					miTabla +=	`</p><button class="btn btn-primary" onclick="editarRegistro(${respuesta[i].id} )" ><i class="material-icons">&#xE254;</i>Editar</button>
+								<button  class="btn btn-danger" onclick="eliminarRegistro(${respuesta[i].id} )"><i class="material-icons">&#xE872;</i>Borrar</button>
+				   				</div>
+							</div>
+							`;
+				//}	
 			}
-			miTabla += '</table>';
+			miTabla += '</div></div>';
 			$("#resultado").append(miTabla); 
-                        limpiarCampos();
+        	limpiarCampos();
 		},
 		error : function(xhr, status) {
-			alert('Ha sucedido un problema:'+ status + xhr.responseText);
+			cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
+			//alert('Ha sucedido un problema:'+ status + xhr.responseText);
 		}
 	});
 }
@@ -66,17 +56,15 @@ function guardarInformacion(){
 		
 		statusCode : {
 			201 :  function() {
-				alert("Categoria guardada!");
+				
+				cargarMensaje("alert-success","Exitoso","Categoria guardada");
 				traerInformacion();	
 				}
 			}
 		});
 	} else {
-		alert("Se deben llenar todos los campos!");
-		/*alertify.alert("Se deben llenar todos los campos!",
-			function() {
-			}
-		);*/
+		cargarMensaje("alert-warning","Advertencia","Se deben llenar todos los campos");
+		//alert("Se deben llenar todos los campos!");
 	}
 }
 
@@ -97,7 +85,9 @@ function editarRegistro (id){
 		$("#actualizar").attr('disabled', false);
 	},
     error : function(xhr, status) {
-        alert('ha sucedido un problema:'+ status);
+			
+		cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
+		//alert('ha sucedido un problema:'+ status);
     }
 });
 }
@@ -121,13 +111,16 @@ function actualizarInformacion(){
 	
 		statusCode : {
 			201 :  function() {
-				alert("Categoria actualizada!");
+
+				cargarMensaje("alert-success","Exitoso","Categoria actualizada");
+				//alert("Categoria actualizada!");
 				traerInformacion();	
 				}
 			}
 		});
 	} else {
-		alert("Se deben llenar todos los campos!");
+		cargarMensaje("alert-warning","Advertencia","Se deben llenar todos los campos");
+		//alert("Se deben llenar todos los campos!");
 	}
 }
 
@@ -149,17 +142,22 @@ function eliminarRegistro(id){
 				  
 					statusCode : {
 						204 :  function() {
-							alert("Categoria eliminada!");
+							cargarMensaje("alert-success","Exitoso","Categoria eliminada");
+							//alert("Categoria eliminada!");
 							traerInformacion();	
 							}
 						}
 					});
 			} else {
-				alert("No se puede eliminar esta categoria, ya que posee relación con moto(s)!");
+
+				cargarMensaje("alert-warning","Advertencia","No se puede eliminar esta categoria, ya que posee relación con moto(s)");
+				//alert("No se puede eliminar esta categoria, ya que posee relación con moto(s)!");
 			}
 		},
 		error : function(xhr, status) {
-			alert('ha sucedido un problema:'+ status);
+			
+			cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
+			//alert('ha sucedido un problema:'+ status);
 		}
 	});
 
@@ -168,9 +166,25 @@ function eliminarRegistro(id){
 function limpiarCampos(){
     
 	$("#id").val("");
-        $("#name").val("");
+    $("#name").val("");
 	$("#description").val("");
 							
 	$("#guardar").attr('disabled', false);
 	$("#actualizar").attr('disabled', true);
 }
+
+function cargarMensaje(tipo, titulo, texto){	
+	$("#mensaje").empty();
+	let mensaje = `<div class="alert ` + tipo + `" data-alert id="myAlert">
+						<strong>` + titulo + `! </strong>`+ texto +`
+					</div>`;
+	$("#mensaje").append(mensaje);
+	$("#mensaje").fadeIn();
+	mostrarAlertBox();
+}
+
+function mostrarAlertBox(){
+	window.setTimeout(function () {
+	  $("#mensaje").fadeOut(300)
+	}, 3000);
+} 

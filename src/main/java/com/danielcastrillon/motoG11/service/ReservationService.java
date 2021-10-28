@@ -7,6 +7,12 @@ package com.danielcastrillon.motoG11.service;
 
 import com.danielcastrillon.motoG11.dao.ReservationRepository;
 import com.danielcastrillon.motoG11.entities.Reservation;
+import com.danielcastrillon.motoG11.reports.CountClients;
+import com.danielcastrillon.motoG11.reports.StatusReservas;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,4 +115,32 @@ public class ReservationService {
                     return true;
                 }).orElse(false);
     }
+    
+    public StatusReservas getReportStatusReservation(){
+        List<Reservation> completed = resRepository.reservationStatus("completed");
+        List<Reservation> cancelled = resRepository.reservationStatus("cancelled");
+        return new StatusReservas(completed.size(), cancelled.size());
+    }
+    
+    public List<Reservation> getReportDateReservation(String dateA, String dateB){
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        Date datoUno = new Date();
+        Date datoDos = new Date();
+        
+        try{
+            datoUno = parser.parse(dateA);
+            datoDos = parser.parse(dateB);
+        } catch(ParseException evt){
+            evt.printStackTrace();
+        }
+        if(datoUno.before(datoDos)){
+            return resRepository.reservationDate(datoUno, datoDos);
+        } else{
+            return new ArrayList<>();
+        }
+    }
+    
+    public List<CountClients> servicioTopClients(){
+        return resRepository.getTopClients();
+    } 
 }

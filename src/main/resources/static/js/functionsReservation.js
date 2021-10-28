@@ -6,48 +6,38 @@ function traerInformacion(){
 		contentType: "application/json; charset=utf-8",
   
 		success : function(respuesta) {
-			console.log(respuesta);
+
 			$("#resultado").empty();
-			let miTabla = '<table>';
-			miTabla += '<tr>';
-			miTabla += '<th>ID</th>';
-			miTabla += '<th>Fecha de Inicio</th>';
-			miTabla += '<th>Fecha Devolución</th>';
-			miTabla += '<th>Estado</th>';
-			miTabla += '<th>Id cliente</th>';
-			miTabla += '<th>Nombre Cliente</th>';
-			miTabla += '<th>Correo Cliente</th>';
-			miTabla += '<th>Acción 1</th>';
-			miTabla += '<th>Acción 2</th>';
-			miTabla += '<th>Calificación</th>';
-			miTabla += '<th>Mensaje Calificación</th>';
-			miTabla += '</tr>';
+			let miTabla = '<div class="container"><div  class= "row">';
 			for (i=0; i<respuesta.length; i++){
-				miTabla += '<tr>';
-				miTabla += '<td>'+ respuesta[i].idReservation+ '</td>'; 		
-				miTabla += '<td>'+ respuesta[i].startDate+ '</td>'; 		
-				miTabla += '<td>'+ respuesta[i].devolutionDate+ '</td>'; 	
-				miTabla += '<td>'+ respuesta[i].status+ '</td>'; 	
-				miTabla += '<td>'+ respuesta[i].client.idClient+ '</td>'; 
-				miTabla += '<td>'+ respuesta[i].client.name+ '</td>'; 	
-				miTabla += '<td>'+ respuesta[i].client.email+ '</td>'; 
-				miTabla += '<td><button onclick="editarRegistro('+respuesta[i].idReservation+' )">Editar</button>';		
-				miTabla += '<td><button onclick="eliminarRegistro('+respuesta[i].idReservation+' )">Eliminar</button>';	
-				if(respuesta[i].score!=null){						
-					miTabla += '<td>'+ respuesta[i].score.stars+ '</td>'; 						
-					miTabla += '<td>'+ respuesta[i].score.messageText+ '</td>'; 
-				}		
-				miTabla += '</tr>';
-	
-			}
-			miTabla += '</table>';
+				miTabla += ` <div class="card m-2" >
+								<div class="card-body" >
+									<h5 class ="card-title"> Reserva #${respuesta[i].idReservation}</h5> 		
+								    <h6 class ="card-subtitle mb-2 text-muted"> Desde: ${respuesta[i].startDate.slice(0, 10)} </h6> 	
+								    <h6 class ="card-subtitle mb-2 text-muted"> Hasta: ${respuesta[i].devolutionDate.slice(0, 10)} </h6>
+									<h6 class ="card-subtitle mb-2 text-muted"> Estado: ${respuesta[i].status} </h6>
+									<p class= "card-text"> ${respuesta[i].client.name} <br>
+														    ${respuesta[i].motorbike.name} </p>
+							`;
+				if(respuesta[i].score!=null){
+					miTabla += `
+								<p class= "card-text"> ${respuesta[i].score.stars} estrella(s) <br> 						
+													   ${respuesta[i].score.messageText} </p>`;
+				}
+				miTabla +=	`		<button class="btn btn-primary" onclick="editarRegistro(${respuesta[i].idReservation} )" ><i class="material-icons">&#xE254;</i>Editar</button>
+								    <button  class="btn btn-danger" onclick="eliminarRegistro(${respuesta[i].idReservation} )"><i class="material-icons">&#xE872;</i>Borrar</button>
+								</div>
+							</div>
+							`;
+			}			
+			miTabla += '</div></div>';
 			$("#resultado").append(miTabla);        
-			pintarSelectClient(); 
-			pintarSelectMoto();
-                        limpiarCampos();
+			pintarSelectClient(0); 
+			pintarSelectMoto(0);
+            limpiarCampos();
 		},
 		error : function(xhr, status) {
-			alert('Ha sucedido un problema:'+ status + json);
+			cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
 		}
 	});
 }
@@ -78,17 +68,17 @@ function guardarInformacion(){
 			
 				statusCode : {
 					201 :  function() {
-						alert("Reserva guardada!");
+						cargarMensaje("alert-success","Exitoso","Reservación guardada");
 						traerInformacion();	
 						}
 					}
 				});
 			}
 		} else {
-			alert("La fecha de devolución debe que ser mayor a la fecha actual!");
+			cargarMensaje("alert-warning","Advertencia","La fecha de devolución debe que ser mayor a la fecha actual");
 		}
 	} else {
-		alert("Se deben llenar todos los campos!");
+		cargarMensaje("alert-warning","Advertencia","Se deben llenar todos los campos");
 	}
 }
 
@@ -114,7 +104,7 @@ function pintarSelectClient(id){
 
 	},
     error : function(xhr, status) {
-        alert('ha sucedido un problema:'+ status);
+        cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
     }
 	});
 	
@@ -142,7 +132,7 @@ function pintarSelectMoto(id){
 
 	},
     error : function(xhr, status) {
-        alert('ha sucedido un problema:'+ status);
+        cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
     }
 	});
 	
@@ -176,7 +166,7 @@ function editarRegistro (id){
 		$("#actualizar").attr('disabled', false);
 	},
     error : function(xhr, status) {
-        alert('ha sucedido un problema:'+ status);
+        cargarMensaje("alert-danger","Error","ha sucedido un problema" + status + ", " + xhr.responseText);
     }
 });
 }
@@ -203,17 +193,17 @@ function actualizarInformacion(){
 			
 				statusCode : {
 					201 :  function() {
-						alert("Reservación actualizada!");
+						cargarMensaje("alert-success","Exitoso","Reservación actualizada");
 						traerInformacion();	
 						}
 					}
 				});
 			}
 		} else {
-			alert("La fecha de devolución debe que ser mayor a la fecha de inicio de la reserva!");
+			cargarMensaje("alert-warning","Advertencia","La fecha de devolución debe que ser mayor a la fecha de inicio de la reserva!");
 		}
 	} else {
-		alert("Se deben llenar todos los campos!");
+		cargarMensaje("alert-warning","Advertencia","Se deben llenar todos los campos");
 	}
 }
 
@@ -226,7 +216,7 @@ function eliminarRegistro(id){
   
     statusCode : {
 		204 :  function() {
-			alert("Reservación eliminada!");
+			cargarMensaje("alert-success","Exitoso","Reservación eliminada");
                         traerInformacion();	
 			}
 		}
@@ -304,3 +294,19 @@ function limpiarCampos(){
 	$("#guardar").attr('disabled', false);
 	$("#actualizar").attr('disabled', true);
 }
+
+function cargarMensaje(tipo, titulo, texto){	
+	$("#mensaje").empty();
+	let mensaje = `<div class="alert ` + tipo + `" data-alert id="myAlert">
+						<strong>` + titulo + `! </strong>`+ texto +`
+					</div>`;
+	$("#mensaje").append(mensaje);
+	$("#mensaje").fadeIn();
+	mostrarAlertBox();
+}
+
+function mostrarAlertBox(){
+	window.setTimeout(function () {
+	  $("#mensaje").fadeOut(300)
+	}, 3000);
+} 

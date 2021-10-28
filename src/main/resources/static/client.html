@@ -4,16 +4,21 @@
 	<meta charset="utf-8">
     <meta http-equiv="Content-Type" content="application/json" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+	<link rel="stylesheet" href="css/ajax.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+	</script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript" src="js/functionsClient.js"></script>
-	<link rel="stylesheet" href="css/ajax.css">
-        
-        <h1>Proyecto Motocicletas</h1>
-	
+</head>
+<body>
+    
+    <h1>Proyecto Motocicletas</h1>
 	<nav>
-		<ul>
+		<ul class="nav justify-content-center">
 			<li><a href="category.html">Categorias</a></li>
 			<li><a href="moto.html">Motocicletas</a></li>
 			<li><a href="client.html">Clientes</a></li>
@@ -23,35 +28,35 @@
 			<li><a href="score.html">Calificación</a></li>
 		</ul>
 	</nav>
+	<br/>
         
-	<h2>CRUD Cliente</h2>
-	<div class="centraTabla">
-		<table>
-			<tr>
-				<input type="hidden" id="idClient" placeholder="idClient" >
-				<td><label><b>Nombre:</b></label></td>
-				<td><input type="text" id="name" placeholder="name" maxlength="250" size="40"></td>
-				<td>&nbsp;</td>
-				<td><label><b>Contraseña:</b></label></td>
-				<td><input type="password" id="password" placeholder="password" maxlength="45" size="15"></td>
-			</tr>
-			
-			<tr>
-				<td><label strong><b>Correo:</b></label></td>
-                                <td><input type="text" id="email" placeholder="email" maxlength="45" size="40"></td>
-				<td>&nbsp;</td>
-				<td><label><b>Edad:</b></label></td>
-				<td><input type="number" id="age" placeholder="age" size="60" min="15" max="130"></td>
-			</tr>
-		   
-		</table>
-    </div>
-	<button onclick="traerInformacion()" id="consultar">Consultar</button>
-	<button onclick="guardarInformacion()" id="guardar">Guardar!</button>
-	<button onclick="actualizarInformacion()" id="actualizar" disabled="true" >Actualizar</button>
-	<br></br>
-	------------------------------------------------------------------------------------------------------
-	<br></br>
+	<h2>Cliente</h2>
+	<div id="mensaje"></div>
+		<div class="form-group container modal-body">					
+			<div class="form-group">
+				<input type="hidden" id="idClient" placeholder="idClient" disabled="true" >
+				<label><b>Nombre:</b></label>
+				<input type="text" id="name" placeholder="name" maxlength="250" class="form-control">
+			</div>	
+			<div class="form-group">
+				<label><b>Contraseña:</b></label>
+				<input type="password" id="password" placeholder="password" maxlength="45" class="form-control">
+			</div>
+			<div class="form-group">
+				<label><b>Correo:</b></label>
+				<input type="text" id="email" placeholder="email" maxlength="45" pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$" class="form-control">
+			</div>
+			<div class="form-group">
+				<label><b>Edad:</b></label>
+				<input type="number" id="age" placeholder="age" min="15" max="130" class="form-control">
+			</div>			
+		</div>
+		<div class="form-group container modal-footer">
+			<button type="button" class="btn btn-danger" onclick="traerInformacion()" id="consultar"><i class="material-icons">search</i>Consultar</button>
+			<button type="button" class="btn btn-info" onclick="guardarInformacion()" id="guardar"><i class="material-icons">save</i>Guardar!</button>
+			<button type="button" class="btn btn-success" onclick="actualizarInformacion()" id="actualizar" aria-disabled="true"><i class="material-icons">refresh</i>Actualizar</button>
+			<br></br>
+		</div>
 	<div id="resultado" class='centraTabla'></div>
 </body>
 </html>

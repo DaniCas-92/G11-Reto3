@@ -6,6 +6,8 @@
 package com.danielcastrillon.motoG11.service;
 
 import com.danielcastrillon.motoG11.entities.Reservation;
+import com.danielcastrillon.motoG11.reports.CountClients;
+import com.danielcastrillon.motoG11.reports.StatusReservas;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +55,20 @@ public class ReservationController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int reservationId) {reservationService.deleteReservation(reservationId);}
+    
+    
+    @GetMapping("/report-status")
+    public StatusReservas getReservation(){
+        return reservationService.getReportStatusReservation();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservationDate(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return reservationService.getReportDateReservation(dateOne, dateTwo);
+    }
+    
+    @GetMapping("/report-clients")
+    public List<CountClients> getClients(){
+        return reservationService.servicioTopClients();
+    }
 }

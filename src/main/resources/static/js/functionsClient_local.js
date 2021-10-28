@@ -1,6 +1,6 @@
 function traerInformacion(){
 	$.ajax({     
-		url : 'http://129.151.106.128/api/Client/all',
+		url : 'http://localhost/api/Client/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -45,7 +45,7 @@ function guardarInformacion(){
 					};
 					let datosJson = JSON.stringify(misDatos); 
 					$.ajax(    
-					'http://129.151.106.128/api/Client/save',
+					'http://localhost/api/Client/save',
 					{data: datosJson,
 					type : 'POST',
 					dataType : 'json',
@@ -72,7 +72,7 @@ function guardarInformacion(){
 function editarRegistro (id){
 
 	$.ajax({    
-    url : 'http://129.151.106.128/api/Client/'+id,
+    url : 'http://localhost/api/Client/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -108,7 +108,7 @@ function actualizarInformacion(){
 					let datosJson = JSON.stringify(misDatos); 
 
 					$.ajax(    
-					'http://129.151.106.128/api/Client/update',
+					'http://localhost/api/Client/update',
 					{data: datosJson,
 					type : 'PUT',
 					dataType : 'json',
@@ -135,7 +135,7 @@ function actualizarInformacion(){
 function eliminarRegistro(id){
       
     $.ajax({    
-		url : 'http://129.151.106.128/api/Client/'+id,
+		url : 'http://localhost/api/Client/'+id,
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -143,7 +143,7 @@ function eliminarRegistro(id){
 		success : function(respuesta) {	
 			if(respuesta.messages == "" && respuesta.reservations == ""){
 				$.ajax( {   
-					url:'http://129.151.106.128/api/Client/'+id,
+					url:'http://localhost/api/Client/'+id,
 					type : 'DELETE',
 					dataType : 'json',
 					contentType: "application/json; charset=utf-8",

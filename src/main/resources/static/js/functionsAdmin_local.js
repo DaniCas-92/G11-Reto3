@@ -1,6 +1,6 @@
 function traerInformacion(){
 	$.ajax({     
-		url : 'http://129.151.106.128/api/Admin/all',
+		url : 'http://localhost/api/Admin/all',
 		type : 'GET',
 		dataType : 'json',
 		contentType: "application/json; charset=utf-8",
@@ -40,7 +40,7 @@ function guardarInformacion(){
 			};
 			let datosJson = JSON.stringify(misDatos); 
 			$.ajax(    
-			'http://129.151.106.128/api/Admin/save',
+			'http://localhost/api/Admin/save',
 			{data: datosJson,
 			type : 'POST',
 			dataType : 'json',
@@ -67,7 +67,7 @@ function guardarInformacion(){
 function editarRegistro (id){
 
     $.ajax({    
-    url : 'http://129.151.106.128/api/Admin/'+id,
+    url : 'http://localhost/api/Admin/'+id,
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -100,7 +100,7 @@ function actualizarInformacion(){
 			let datosJson = JSON.stringify(misDatos); 
 
 			$.ajax(    
-			'http://129.151.106.128/api/Admin/update',
+			'http://localhost/api/Admin/update',
 			{data: datosJson,
 			type : 'PUT',
 			dataType : 'json',
@@ -123,7 +123,7 @@ function actualizarInformacion(){
 
 function eliminarRegistro(id){
 	$.ajax( {   
-    url:'http://129.151.106.128/api/Admin/'+id,
+    url:'http://localhost/api/Admin/'+id,
     type : 'DELETE',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
