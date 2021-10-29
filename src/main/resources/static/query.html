@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>	
 	<meta charset="utf-8">
     <meta http-equiv="Content-Type" content="application/json" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +12,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/functionsMessage.js"></script>
-</head>
-<body> 
+	<script type="text/javascript" src="js/functionsQuerys.js"></script>
 
-	<h1>Proyecto Motocicletas</h1>	
+    <title>Grupo11 - Motocicletas</title>
+</head>
+<body>
+	<h1>Proyecto Motocicletas</h1>
 	<div class="container">
 		<ul class="nav nav-pills">
 		  <li class="nav-item">
@@ -29,7 +30,7 @@
 			<a class="nav-link" href="client.html">Clientes</a>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link active" href="message.html">Mensajes</a>
+			<a class="nav-link" href="message.html">Mensajes</a>
 		  </li>
 		  <li class="nav-item">
 			<a class="nav-link" href="reservation.html">Reservas</a>
@@ -41,7 +42,7 @@
 			<a class="nav-link" href="score.html">Calificación</a>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link" href="query.html">Consultas</a>
+			<a class="nav-link active" href="query.html">Consultas</a>
 		  </li>
 		  <!--<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#">Consultas</a>
@@ -54,31 +55,27 @@
 		</ul>
 	</div>
 	<br/>
-        
-	<h2>Mensaje</h2>
+
+	<h2>Consultas</h2>
 	<div id="mensaje"></div>
 		<div class="form-group container modal-body">					
 			<div class="form-group">
-				<input type="hidden" id="idMessage" placeholder="idMessage" disabled="true" >
-				<label strong><b>Mensaje de Texto:</b></label>
-				<input type="text" id="messageText" placeholder="messageText" maxlength="250" class="form-control">
-			</div>
-			<div class="form-group">
-				<label><b>Cliente:</b></label>
-				<select id="cli" class="form-control"></select>
+				<label><b>Fecha de Inicio:</b></label>
+				<input type="date" id="startDate" placeholder="yyyy-mm-dd" class="form-control">
 			</div>	
 			<div class="form-group">
-				<label><b>Moto:</b></label>
-				<select id="mot" class="form-control"></select>
-			</div>		
+				<label><b>Fecha Fin:</b></label>
+				<input type="date" id="endDate" placeholder="yyyy-mm-dd" class="form-control">
+			</div>
+			<div class="form-group container modal-footer">
+				<button type="button" class="btn btn-danger" onclick="consultarReporteDate()" id="consultarReporteDate"><i class="material-icons">search</i>Conteo de reservas</button>
+			</div>
 		</div>
 		<div class="form-group container modal-footer">
-			<button type="button" class="btn btn-danger" onclick="traerInformacion()" id="consultar"><i class="material-icons">search</i>Consultar</button>
-			<button type="button" class="btn btn-info" onclick="guardarInformacion()" id="guardar"><i class="material-icons">save</i>Guardar!</button>
-			<button type="button" class="btn btn-success" onclick="actualizarInformacion()" id="actualizar" aria-disabled="true"><i class="material-icons">refresh</i>Actualizar</button>
+			<button type="button" class="btn btn-info" onclick="consultarReporteStatus()" id="consultarReporteStatus"><i class="material-icons">search</i>Reservas completadas vs canceladas</button>
+			<button type="button" class="btn btn-success" onclick="consultarReporteClients()" id="consultarReporteClients"><i class="material-icons">search</i>Top mejores clientes</button>
 			<br></br>
 		</div>
 	<div id="resultado" class='centraTabla'></div>
-
 </body>
 </html>

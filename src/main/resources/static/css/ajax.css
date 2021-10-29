@@ -7,7 +7,7 @@ body {
 
 h1 {
     background-color: #E0E0E0;
-    color: white;
+    color: black;
     margin: 0px 0px 30px 0px;
     padding: 20px;
     text-align: center;
@@ -15,7 +15,7 @@ h1 {
 
 h2 {
     background-color: #E0E0E0;
-    color: white;
+    color: black;
     margin: 0px 0px 30px 0px;
     padding: 14px;
     text-align: center;
@@ -43,27 +43,3 @@ button:active {
 #txt-for-request-content {
     border: 2px dashed black;
 }
-
-nav a{
-      text-decoration:none;
-      color:inherit;
-      font-size:16px;
-      }
-            
-nav li{
-      display:inline-block;
-      width:150px;
-      height:40px;
-      padding:5px 10px;
-      background-color:#669CB8;
-      border:1px solid #000;
-      text-align:center;
-      color:#fff;
-      position:relative;
-	  border-radius: 10px;
-}
-            
-nav li:hover{
-      background-color:#fff;
-      color:#000;
-      }
